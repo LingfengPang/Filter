@@ -10,7 +10,7 @@ typedef struct
 	double filterArray[Middle_Size];
 }MiddleCoe;
 
-MiddleCoe M_T0[4];
+MiddleCoe M_T0;
 
 //double filterArray_x[Middle_Size] = {0.0, 0.0, 0.0, 0.0, 0.0};
 
@@ -45,7 +45,7 @@ double MiddleFilter(const double ResrcData, int *index, double *filterArray)
 int main(){
     double r;
 	double res=5.2,res_f;//假设5.2为实际值，res_f为测量值
-	M_T0[1].index = 0;//VS进行初始化
+	M_T0.index = 0;//VS进行初始化
 	double noise;
 	for (int i = 0;i<100;i++){
 		noise = ((rand()%21+1)*0.1-1.0)*0.5;//噪声
@@ -56,8 +56,8 @@ int main(){
 			res_f = res - (i%10)*0.1;
 		}*/
 		res_f = res + noise;
-    	r = MiddleFilter(res_f,&M_T0[1].index, M_T0[1].filterArray);
-    	printf("%d: %lf  %d  %lf\n",i,r,M_T0[1].index,noise);
+    	r = MiddleFilter(res_f,&M_T0.index, M_T0.filterArray);
+    	printf("%d: %lf  %d  %lf\n",i,r,M_T0.index,noise);
 		//res = res+0.2;
 		}
     system("pause");
